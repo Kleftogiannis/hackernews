@@ -1,9 +1,11 @@
 const SearchInput = ({
   searchTerm,
   setSearchTerm,
+  fetchResults,
 }: {
   searchTerm: string;
-  setSearchTerm: (e: any) => void;
+  setSearchTerm: (searchTerm: string) => void;
+  fetchResults: (fetchValue: string) => void;
 }) => {
   return (
     <div
@@ -18,7 +20,10 @@ const SearchInput = ({
         type="text"
         placeholder="Search title..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          fetchResults(e.target.value);
+        }}
       />
     </div>
   );
