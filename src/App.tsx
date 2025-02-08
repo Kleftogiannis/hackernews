@@ -1,15 +1,21 @@
 import "./App.css";
 import { useState } from "react";
 import SearchInput from "./components/SearchInput";
+import AutoComplete from "./components/AutoComplete";
+import SavedStories from "./components/SavedStories";
+
+export interface Result {
+  title: string;
+  author: string;
+  num_comments: number;
+  points: number;
+}
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
-  const [savedItems, setSavedItems] = useState<
-    { title: string; author: string; num_comments: number; points: number }[]
-  >([]);
+  const [results, setResults] = useState<Result[]>([]);
+  const [savedItems, setSavedItems] = useState<Result[]>([]);
 
-  console.log(searchTerm);
   const fetchResults = async (searchTerm: string) => {
     if (searchTerm.length < 3) {
       setResults([]);
@@ -25,14 +31,8 @@ function App() {
       console.error("Error fetching results:", error);
     }
   };
-  console.log(results);
 
-  const handleSelect = (item: {
-    title: string;
-    author: string;
-    num_comments: number;
-    points: number;
-  }) => {
+  const handleSelect = (item: Result) => {
     setSavedItems([...savedItems, item]);
     setSearchTerm("");
     setResults([]);
@@ -49,27 +49,8 @@ function App() {
         setSearchTerm={setSearchTerm}
         fetchResults={fetchResults}
       />
-      {results.length > 0 && (
-        <ul>
-          {results.map((item, index) => (
-            <li key={index} onClick={() => handleSelect(item)}>
-              {item.title} {item.author} {item.num_comments} {item.points}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div>
-        <h3>Saved Stories</h3>
-        {savedItems.map((item, index) => (
-          <div key={index}>
-            <span>
-              {item.title} {item.author} {item.num_comments} {item.points}
-            </span>
-            <button onClick={() => handleDelete(index)}>Delete</button>
-          </div>
-        ))}
-      </div>
+      <AutoComplete results={results} handleSelect={handleSelect} />
+      <SavedStories savedItems={savedItems} handleDelete={handleDelete} />
     </>
   );
 }
