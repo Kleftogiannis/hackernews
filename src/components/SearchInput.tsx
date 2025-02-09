@@ -1,3 +1,5 @@
+import { Typography, Box } from "@mui/material";
+
 const SearchInput = ({
   searchTerm,
   setSearchTerm,
@@ -7,16 +9,20 @@ const SearchInput = ({
   setSearchTerm: (searchTerm: string) => void;
   fetchResults: (fetchValue: string) => void;
 }) => {
+  const style = {
+    box: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      width: "600px",
+    },
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-      }}
-    >
-      <div>Search</div>
+    <Box sx={style.box}>
+      <Typography variant="h6">Search</Typography>
       <input
+        style={{ width: "100%", height: "50px" }}
         type="text"
         placeholder="Search title..."
         value={searchTerm}
@@ -25,7 +31,7 @@ const SearchInput = ({
           fetchResults(e.target.value);
         }}
       />
-    </div>
+    </Box>
   );
 };
 export default SearchInput;

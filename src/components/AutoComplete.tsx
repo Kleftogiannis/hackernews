@@ -1,4 +1,6 @@
 import { Result } from "../App";
+import { Box, List, ListItem } from "@mui/material";
+import StoriesComponent from "./StoriesComponent";
 
 const AutoComplete = ({
   results,
@@ -7,16 +9,37 @@ const AutoComplete = ({
   results: Result[];
   handleSelect: (item: Result) => void;
 }) => {
+  const style = {
+    list: {
+      margin: "0 auto",
+      maxWidth: "600px",
+      maxHeight: "600px",
+      overflow: "auto",
+    },
+    listItem: { width: "600px", height: "100px", border: "1px solid" },
+  };
+
   return (
-    results.length > 0 && (
-      <ul>
-        {results.map((item: Result, index) => (
-          <li key={index} onClick={() => handleSelect(item)}>
-            {item.title} {item.author} {item.num_comments} {item.points}
-          </li>
-        ))}
-      </ul>
-    )
+    <Box>
+      {results.length > 0 && (
+        <List style={style.list}>
+          {results.map((item: Result, index) => (
+            <ListItem
+              key={index}
+              onClick={() => handleSelect(item)}
+              style={style.listItem}
+            >
+              <StoriesComponent
+                title={item.title}
+                author={item.author}
+                num_comments={item.num_comments}
+                points={item.points}
+              />
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Box>
   );
 };
 
