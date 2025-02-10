@@ -22,14 +22,16 @@ const SavedStories = ({
     list: {
       margin: "0 auto",
       maxWidth: "600px",
-      maxHeight: "600px",
+      maxHeight: "400px",
       overflow: "auto",
     },
     listItem: { width: "600px", height: "100px", border: "1px solid" },
   };
   return (
     <Box sx={style.box}>
-      <Typography variant="h6">Saved Stories</Typography>
+      <Typography variant="h6" style={{ color: "black", fontWeight: "bold" }}>
+        Saved Stories
+      </Typography>
       {savedItems.length > 0 && (
         <List style={style.list}>
           {savedItems.map((item: Result, index) => (
@@ -40,7 +42,7 @@ const SavedStories = ({
                 num_comments={item.num_comments}
                 points={item.points}
               />
-              <Button onClick={() => handleDelete(index)} color={"error"}>
+              <Button onClick={() => handleDelete(index)} color="error">
                 Delete
               </Button>
             </ListItem>

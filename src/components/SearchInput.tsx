@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, TextField } from "@mui/material";
 
 const SearchInput = ({
   searchTerm,
@@ -20,9 +20,11 @@ const SearchInput = ({
 
   return (
     <Box sx={style.box}>
-      <Typography variant="h6">Search</Typography>
-      <input
-        style={{ width: "100%", height: "50px" }}
+      <Typography variant="h6" style={{ color: "black", fontWeight: "bold" }}>
+        Search
+      </Typography>
+      <TextField
+        style={{ width: "100%" }}
         type="text"
         placeholder="Search title..."
         value={searchTerm}
