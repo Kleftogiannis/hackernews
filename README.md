@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# Search Autocomplete App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a React application built with Vite that provides a search input with autocomplete functionality. As the user types, it queries an API and displays suggestions in a dropdown list. The user can select a suggestion to save it in a list below, where they can also remove saved items.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Search Input**: Users can enter text to search for items.
+- **Autocomplete List**: Displays API results when the user types at least 3 characters.
+- **Saved Items List**: Users can select an item from the autocomplete list to save it.
+- **Delete Option**: Users can remove saved items.
+- **Session Storage**: Saved items persist across sessions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- React (with Vite)
+- TypeScript
+- Session Storage
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Kleftogiannis/hackernews.git
+   cd hacker-news
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm run dev
+   ```
+
+## Project Structure
+
+```
+/src
+  ├── components
+  │   ├── SearchInput.tsx
+  │   ├── AutoComplete.tsx
+  │   ├── SavedStories.tsx
+  │   ├── StoriesComponent.tsx
+  ├── App.tsx
+  ├── main.tsx
+  ├── index.css
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## How It Works
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. The user types in the search input.
+2. After 3 characters, an API request is triggered.
+3. The API results are displayed in an autocomplete dropdown.
+4. The user clicks on a suggestion to save it in the list.
+5. The user can remove saved items using the delete button.
+6. The saved items persist in session storage.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Testing
+
+Unit tests are written using Vite's test framework (`vitest`). To run the tests:
+
+```sh
+npm run test
 ```
+
+## Future Improvements
+
+- Add debounce for API calls to reduce network requests.
+- Implement caching for better performance.
+- Enhance UI with animations or tailwind.
