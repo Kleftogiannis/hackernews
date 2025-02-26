@@ -2,21 +2,40 @@
 
 ## Overview
 
-This is a React application built with Vite that provides a search input with autocomplete functionality. As the user types, it queries an API and displays suggestions in a dropdown list. The user can select a suggestion to save it in a list below, where they can also remove saved items.
+This is a search autocomplete application built with React,TypeScript Vite, and Redux. The app fetches search results from an API as the user types and displays them in an autocomplete list. Users can save selected results and manage them within the UI.
 
 ## Features
 
-- **Search Input**: Users can enter text to search for items.
-- **Autocomplete List**: Displays API results when the user types at least 3 characters.
-- **Saved Items List**: Users can select an item from the autocomplete list to save it.
-- **Delete Option**: Users can remove saved items.
-- **Session Storage**: Saved items persist across sessions.
+Debounced Search: Fetch results only after the user has stopped typing for better performance.
+
+Autocomplete Suggestions: Shows dynamic search results after entering at least 3 characters.
+
+Save & Remove Items: Users can select and save items, which are managed in Redux state.
+
+Duplicate Prevention: Ensures that saved items are not duplicated.
+
+State Management: Uses Redux for global state management.
 
 ## Tech Stack
 
 - React (with Vite)
 - TypeScript
-- Session Storage
+- Redux
+
+## Project Structure
+
+📦 src
+┣ 📂 components
+┃ ┣ 📜 SearchInput.tsx
+┃ ┣ 📜 AutocompleteList.tsx
+┃ ┣ 📜 SavedItemsList.tsx
+┃ ┗ 📜 SearchComponent.tsx
+┣ 📂 redux
+┃ ┣ 📜 store.ts
+┃ ┣ 📜 searchSlice.ts
+┃ ┗ 📜 savedSlice.ts
+┣ 📜 main.tsx
+┣ 📜 App.tsx
 
 ## Installation
 
@@ -34,20 +53,6 @@ This is a React application built with Vite that provides a search input with au
    npm run dev
    ```
 
-## Project Structure
-
-```
-/src
-  ├── components
-  │   ├── SearchInput.tsx
-  │   ├── AutoComplete.tsx
-  │   ├── SavedStories.tsx
-  │   ├── StoriesComponent.tsx
-  ├── App.tsx
-  ├── main.tsx
-  ├── index.css
-```
-
 ## How It Works
 
 1. The user types in the search input.
@@ -55,7 +60,15 @@ This is a React application built with Vite that provides a search input with au
 3. The API results are displayed in an autocomplete dropdown.
 4. The user clicks on a suggestion to save it in the list.
 5. The user can remove saved items using the delete button.
-6. The saved items persist in session storage.
+6. The saved items persist in redux store.
+
+## Redux State management
+
+- searchSlice.ts handles search results and API fetching.
+
+- savedSlice.ts manages saved items and prevents duplicates.
+
+- store.ts configures the Redux store.
 
 ## Testing
 
@@ -67,6 +80,4 @@ npm run test
 
 ## Future Improvements
 
-- Add debounce for API calls to reduce network requests.
-- Implement caching for better performance.
 - Enhance UI with animations or tailwind.
