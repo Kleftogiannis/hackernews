@@ -1,13 +1,13 @@
 import { Typography, Box, List, ListItem, Button } from "@mui/material";
-import { Result } from "../App";
+import { ResultsWithID } from "../App";
 import StoriesComponent from "./StoriesComponent";
 
 const SavedStories = ({
   savedItems,
   handleDelete,
 }: {
-  savedItems: Result[];
-  handleDelete: (index: number) => void;
+  savedItems: ResultsWithID[];
+  handleDelete: (id: string) => void;
 }) => {
   const style = {
     box: {
@@ -34,15 +34,15 @@ const SavedStories = ({
       </Typography>
       {savedItems.length > 0 && (
         <List style={style.list}>
-          {savedItems.map((item: Result, index) => (
-            <ListItem key={index} style={style.listItem}>
+          {savedItems.map((item: ResultsWithID) => (
+            <ListItem key={item.objectID} style={style.listItem}>
               <StoriesComponent
                 title={item.title}
                 author={item.author}
                 num_comments={item.num_comments}
                 points={item.points}
               />
-              <Button onClick={() => handleDelete(index)} color="error">
+              <Button onClick={() => handleDelete(item.objectID)} color="error">
                 Delete
               </Button>
             </ListItem>
